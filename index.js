@@ -22,3 +22,4 @@ function startServer() {
          if (code == '.' || code == 1 || code == 0) start()
       })
 }
+startServer()
