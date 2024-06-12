@@ -1,6 +1,3 @@
-//base by DGXeon
-//recode by rapikz
-
 const {
    spawn
 } = require('child_process')

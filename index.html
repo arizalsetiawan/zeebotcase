@@ -1,53 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>ZeeBot</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Bot</title>
   <style>
-    body {
-      text-align: center;
-      padding-top: 100px;
-    }
-    
-    button {
+    .button {
+      display: inline-block;
       padding: 10px 20px;
-      font-size: 18px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
+      font-size: 16px;
       cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      outline: none;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
       border-radius: 5px;
+      box-shadow: 0 5px #0069d9;
     }
-    
-    button:hover {
-      background-color: #45a049;
+
+    .button:hover {
+      background-color: #0069d9;
+    }
+
+    .button:active {
+      background-color: #005cbf;
+      box-shadow: 0 4px #0056b3;
+      transform: translateY(4px);
     }
   </style>
 </head>
 <body>
-  <button onclick="startServer()">Start ZeeBot</button>
+  <button class="button" id="executeButton">Mulai Server ZeeBot</button>
 
   <script>
-    function startServer() {
-      const { spawn } = require('child_process');
-      const path = require('path');
-      let args = [path.join(__dirname, 'main.js'), ...process.argv.slice(2)];
-      console.log([process.argv[0], ...args].join('\n'));
-      let p = spawn(process.argv[0], args, { stdio: ['inherit', 'inherit', 'inherit', 'ipc'] })
-        .on('message', data => {
-          if (data == 'reset') {
-            console.log('Restarting Bot...');
-            p.kill();
-            startServer();
-            delete p;
-          }
-        })
-        .on('exit', code => {
-          console.error('Exited with code:', code);
-          if (code == '.' || code == 1 || code == 0) {
-            startServer();
-          }
-        });
-    }
+    document.getElementById('executeButton').addEventListener('click', function() {
+       const { exec } = require('child_process');
+       exec('node start.js', (err, stdout, stderr) => {
+         if (err) {
+           console.error(err);
+           return;
+         }
+         console.log(stdout);
+       });
+    });
   </script>
 </body>
 </html>
