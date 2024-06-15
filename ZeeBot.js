@@ -11413,7 +11413,7 @@ fetch('https://api.digiflazz.com/v1/cek-saldo', {
 })
 .then(response => response.json())
 .then(data => {
-  m.reply(`${data.data}`);
+  m.reply(data.data.deposit + "\n" + data.data.message);
   console.log(data)
 })
 .catch((error) => {
