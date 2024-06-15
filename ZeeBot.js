@@ -28,6 +28,7 @@ const ms = toMs = require('ms')
 const axios = require('axios')
 const fetch = require('node-fetch')
 const yts = require('yt-search')
+const CryptoJS = require('crypto-js')
 const gis = require('g-i-s')
 const cheerio = require('cheerio')
 const { jadibot, conns } = require('./jadibot')
@@ -11395,6 +11396,42 @@ case "fetch":
       .catch((error) => m.reply("Error", error));
   }
   break
+case 'digiflazz': {
+const data = {
+  cmd: "deposit",
+  username: "gozajuDzMpAo",
+  sign: "740b00a1b8784e028cc8078edf66d12b"
+};
+
+fetch('https://api.digiflazz.com/v1/cek-saldo', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  m.reply(data);
+})
+.catch((error) => {
+  m.reply('Error:', error);
+});
+}
+break
+case 'md5digi': {
+const username = "gozajuDzMpAo";
+const apiKey = "f0a35b6c-5210-5ac6-a043-c3c5a95821ee";
+
+// Menggabungkan username, apiKey, dan "depo"
+const combinedString = username + apiKey + "depo";
+
+// Menghasilkan hash MD5
+const hash = CryptoJS.MD5(combinedString).toString();
+
+m.reply(hash); // Output hash MD5
+}
+break
 case 'ai':
 case 'openai': {
 	if (!text) return replygc(`*• Example:* ${prefix + command} what is your name`);
