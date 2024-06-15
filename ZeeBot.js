@@ -11412,10 +11412,10 @@ fetch('https://api.digiflazz.com/v1/cek-saldo', {
 })
 .then(response => response.json())
 .then(data => {
-  console.log(data);
+  m.reply(`${data}`);
 })
 .catch((error) => {
-  console.log('Error:', error);
+  m.reply('Error:', error);
 });
 }
 break
@@ -11423,13 +11423,12 @@ case 'md5digi': {
 const username = args[0]
 const apiKey = args[1]
 const depo = args[2]
-// Menggabungkan username, apiKey, dan "depo"
+if (!username) return m.reply("Masukkan Username API Digiflazz")
+if (!apiKey) return m.reply("Masukkan APIKEY Digiflazz")
+if (!depo) return m.reply("Masukkan Jumlah Deposit Anda")
 const combinedString = username + apiKey + depo;
-
-// Menghasilkan hash MD5
 const hash = CryptoJS.MD5(combinedString).toString();
-
-m.reply(hash); // Output hash MD5
+m.reply(hash);
 }
 break
 case 'ai':
