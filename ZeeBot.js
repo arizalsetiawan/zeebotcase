@@ -11397,7 +11397,7 @@ case "fetch":
   }
   break
 case 'digiflazz': {
-const combinedString = "gozajuDzMpAo" + "f0a35b6c-5210-5ac6-a043-c3c5a95821ee" + "20000";
+const combinedString = "gozajuDzMpAo" + "dev-58db7290-2b2f-11ef-b3f4-e7f5a8d83262" + "20000";
 const hash = CryptoJS.MD5(combinedString).toString();
 const data = {
   cmd: "deposit",
