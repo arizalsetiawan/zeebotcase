@@ -11397,12 +11397,10 @@ case "fetch":
   }
   break
 case 'digiflazz': {
-const combinedString = "gozajuDzMpAo" + "dev-58db7290-2b2f-11ef-b3f4-e7f5a8d83262" + "20000";
-const hash = CryptoJS.MD5(combinedString).toString();
 const data = {
   cmd: "deposit",
   username: "gozajuDzMpAo",
-  sign: hash
+  sign: args[0]
 };
 
 fetch('https://api.digiflazz.com/v1/cek-saldo', {
@@ -11422,11 +11420,11 @@ fetch('https://api.digiflazz.com/v1/cek-saldo', {
 }
 break
 case 'md5digi': {
-const username = "gozajuDzMpAo";
-const apiKey = "f0a35b6c-5210-5ac6-a043-c3c5a95821ee";
-
+const username = args[0]
+const apiKey = args[1]
+const depo = args[2]
 // Menggabungkan username, apiKey, dan "depo"
-const combinedString = username + apiKey + "depo";
+const combinedString = username + apiKey + depo;
 
 // Menghasilkan hash MD5
 const hash = CryptoJS.MD5(combinedString).toString();
