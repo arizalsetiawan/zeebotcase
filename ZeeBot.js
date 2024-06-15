@@ -11397,10 +11397,11 @@ case "fetch":
   }
   break
 case 'digiflazz': {
+const input = args[0]
 const data = {
   cmd: "deposit",
   username: "gozajuDzMpAo",
-  sign: args[0]
+  sign: input
 };
 
 fetch('https://api.digiflazz.com/v1/cek-saldo', {
