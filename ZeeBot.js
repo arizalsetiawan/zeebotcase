@@ -11397,10 +11397,12 @@ case "fetch":
   }
   break
 case 'digiflazz': {
+const combinedString = "gozajuDzMpAo" + "f0a35b6c-5210-5ac6-a043-c3c5a95821ee" + "depo";
+const hash = CryptoJS.MD5(combinedString).toString();
 const data = {
   cmd: "deposit",
   username: "gozajuDzMpAo",
-  sign: "740b00a1b8784e028cc8078edf66d12b"
+  sign: hash
 };
 
 fetch('https://api.digiflazz.com/v1/cek-saldo', {
@@ -11412,10 +11414,10 @@ fetch('https://api.digiflazz.com/v1/cek-saldo', {
 })
 .then(response => response.json())
 .then(data => {
-  m.reply(data);
+  console.log(data);
 })
 .catch((error) => {
-  m.reply('Error:', error);
+  console.log('Error:', error);
 });
 }
 break
