@@ -46,6 +46,7 @@ const scp2 = require('./lib/scraper2')
 const { xvideosSearch, xvideosdl, xnxxdl, xnxxSearch} = require('./lib/scraper3.js')
 const pkg = require('imgur')
 let ssh_prem = JSON.parse(fs.readFileSync('./cfg/ssh.json'))
+let refdigi = JSON.parse(fs.readFileSync('./src/digiflazz_ref-id.json'))
 const { ImgurClient } = pkg
 const uploadImage = require('./lib/uploadImage')
 const client = new ImgurClient({ clientId: "a0113354926015a" })
@@ -11444,6 +11445,47 @@ fetch('https://api.digiflazz.com/v1/price-list', {
 .then(response => response.json())
 .then(data => {
   res = data.data.map(v => `*Nama Produk:* ${v.desc}\n*SKU Code:* ${v.buyer_sku_code}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* ${v.price}\n*Stok:* ${v.stock}`).join`\n\n`
+  m.reply(res)
+  console.log(data)
+})
+.catch((error) => {
+  m.reply('Error:', error);
+  console.log('Error:', error)
+});
+}
+break
+case 'pay': {
+let kode_sku = args[1]
+let nomor = args[2]
+let refidcustom = args[3]
+if (!kode_sku) return m.reply("Mohon Masukkan Kode SKU Product")
+if (!nomor) return m.reply("Mohon Masukkan Nomor Customer")
+refdigi.push(randomBytes(8).toString('hex'))
+fs.writeFileSync('./src/digiflazz_ref-id.json', JSON.stringify(refdigi))
+m.reply("Membuat Ref_ID baru, Mohon ditunggu")
+await sleep(3000)
+const username = "gozajuDzMpAo"
+const apiKey = "f0a35b6c-5210-5ac6-a043-c3c5a95821ee"
+const combinedString = username + apiKey + refdigi[0];
+const hash = md5(combinedString)
+const data = {
+  username: "gozajuDzMpAo",
+  buyer_sku_code: kode_sku,
+  customer_no: nomor,
+  ref_id: refdigi[0] || refidcustom,
+  sign: hash
+};
+
+fetch('https://api.digiflazz.com/v1/transaction', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  res = data.data.map(v => `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}\n*Saldo Terakhir:* ${v.buyer_last_saldo}\n*Harga:* ${v.price}`).join`\n\n`
   m.reply(res)
   console.log(data)
 })
