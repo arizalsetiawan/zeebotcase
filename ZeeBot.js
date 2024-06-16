@@ -11444,7 +11444,7 @@ fetch('https://api.digiflazz.com/v1/price-list', {
 })
 .then(response => response.json())
 .then(data => {
-  res = data.data.map(v => `*Nama Produk:* ${v.desc}\n*SKU Code:* ${v.buyer_sku_code}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* ${v.price}\n*Stok:* ${v.stock}`).join`\n\n`
+  res = data.data.map(v => `*Nama Produk:* ${v.desc}\n*SKU Code:* ${v.buyer_sku_code}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* ${v.price}`).join`\n\n`
   m.reply(res)
   console.log(data)
 })
@@ -11486,7 +11486,7 @@ fetch('https://api.digiflazz.com/v1/transaction', {
 .then(response => response.json())
 .then(data => {
   v = data.data
-  res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}\n*Saldo Terakhir:* ${v.buyer_last_saldo}\n*Harga:* ${v.price}`
+  res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}`
   m.reply(res)
   console.log(data)
  })
@@ -11513,7 +11513,7 @@ fetch('https://api.digiflazz.com/v1/transaction', {
 .then(response => response.json())
 .then(data => {
   v = data.data
-  res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}\n*Saldo Terakhir:* ${v.buyer_last_saldo}\n*Harga:* ${v.price}`
+  res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}`
   m.reply(res)
   console.log(data)
 })
