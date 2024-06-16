@@ -11397,7 +11397,10 @@ case "fetch":
       .catch((error) => m.reply("Error", error));
   }
   break
-case 'digiflazz': {
+case 'digi': {
+let type = (args[0] || '').toLowerCase()
+switch (type) {
+case 'saldo': {
 const input = args[0] || "cd6cebb789b3bfaa94d114898e8ec0e3"
 const data = {
   cmd: "deposit",
@@ -11421,6 +11424,35 @@ fetch('https://api.digiflazz.com/v1/cek-saldo', {
   m.reply('Error:', error);
   console.log('Error:', error)
 });
+}
+break
+case 'daftarharga': {
+const input = args[0] || "e798f251069c2f2ad67c478e15b0598c"
+const data = {
+  cmd: "deposit",
+  username: "gozajuDzMpAo",
+  sign: input
+};
+
+fetch('https://api.digiflazz.com/v1/cek-saldo', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  m.reply(`${data.data}`)
+  console.log(data)
+})
+.catch((error) => {
+  m.reply('Error:', error);
+  console.log('Error:', error)
+});
+}
+break
+}
 }
 break
 case 'md5digi': {
