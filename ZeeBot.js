@@ -11462,8 +11462,8 @@ if (!kode_sku) return m.reply("Mohon Masukkan Kode SKU Product")
 if (!nomor) return m.reply("Mohon Masukkan Nomor Customer")
 refdigi.push(new randomBytes(8).toString('hex'))
 fs.writeFileSync('./src/digiflazz_ref-id.json', JSON.stringify(refdigi))
-m.reply("Membuat Ref_ID baru, Mohon ditunggu")
 await sleep(3000)
+if (!refidcustom) return {
 const username = "gozajuDzMpAo"
 const apiKey = "f0a35b6c-5210-5ac6-a043-c3c5a95821ee"
 const combinedString = username + apiKey + refdigi[0];
@@ -11472,7 +11472,7 @@ const data = {
   username: "gozajuDzMpAo",
   buyer_sku_code: kode_sku,
   customer_no: nomor,
-  ref_id: refdigi[0] || refidcustom,
+  ref_id: refdigi[0],
   sign: hash
 };
 
@@ -11489,6 +11489,34 @@ fetch('https://api.digiflazz.com/v1/transaction', {
   res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}\n*Saldo Terakhir:* ${v.buyer_last_saldo}\n*Harga:* ${v.price}`
   m.reply(res)
   console.log(data)
+ }
+ } else {
+const username = "gozajuDzMpAo"
+const apiKey = "f0a35b6c-5210-5ac6-a043-c3c5a95821ee"
+const combinedString = username + apiKey + refidcustom;
+const hash = md5(combinedString)
+const data = {
+  username: "gozajuDzMpAo",
+  buyer_sku_code: kode_sku,
+  customer_no: nomor,
+  ref_id: refidcustom,
+  sign: hash
+};
+
+fetch('https://api.digiflazz.com/v1/transaction', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  v = data.data
+  res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}\n*Saldo Terakhir:* ${v.buyer_last_saldo}\n*Harga:* ${v.price}`
+  m.reply(res)
+  console.log(data)
+ }
 })
 .catch((error) => {
   m.reply('Error:', error);
