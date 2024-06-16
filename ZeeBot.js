@@ -11521,9 +11521,12 @@ fetch('https://api.digiflazz.com/v1/transaction', {
   m.reply('Error:', error);
   console.log('Error:', error)
 });
+}
 await sleep(3000)
 refdigi.splice(refdigi,1)
 	fs.writeFileSync('./src/digiflazz_ref-id.json', JSON.stringify(refdigi))
+}
+break
 }
 }
 break
