@@ -11443,7 +11443,7 @@ fetch('https://api.digiflazz.com/v1/price-list', {
 })
 .then(response => response.json())
 .then(data => {
-  res = data.data.map(v => `*Nama Produk:* ${v.desc}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* ${v.price}\n*Stok:* ${v.stock}`).join`\n\n`
+  res = data.data.map(v => `*Nama Produk:* ${v.desc}\n*SKU Code:* ${v.buyer_sku_code}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* ${v.price}\n*Stok:* ${v.stock}`).join`\n\n`
   m.reply(res)
   console.log(data)
 })
