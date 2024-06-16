@@ -11489,7 +11489,7 @@ fetch('https://api.digiflazz.com/v1/transaction', {
   res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}\n*Saldo Terakhir:* ${v.buyer_last_saldo}\n*Harga:* ${v.price}`
   m.reply(res)
   console.log(data)
- }
+ })
  } else {
 const username = "gozajuDzMpAo"
 const apiKey = "f0a35b6c-5210-5ac6-a043-c3c5a95821ee"
@@ -11516,7 +11516,6 @@ fetch('https://api.digiflazz.com/v1/transaction', {
   res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}\n*Saldo Terakhir:* ${v.buyer_last_saldo}\n*Harga:* ${v.price}`
   m.reply(res)
   console.log(data)
- }
 })
 .catch((error) => {
   m.reply('Error:', error);
@@ -11525,6 +11524,7 @@ fetch('https://api.digiflazz.com/v1/transaction', {
 await sleep(3000)
 refdigi.splice(refdigi,1)
 	fs.writeFileSync('./src/digiflazz_ref-id.json', JSON.stringify(refdigi))
+}
 }
 break
 }
