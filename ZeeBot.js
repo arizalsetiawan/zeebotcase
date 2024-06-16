@@ -11398,7 +11398,7 @@ case "fetch":
   }
   break
 case 'digiflazz': {
-const input = args[0]
+const input = args[0] || "cd6cebb789b3bfaa94d114898e8ec0e3"
 const data = {
   cmd: "deposit",
   username: "gozajuDzMpAo",
@@ -11414,7 +11414,7 @@ fetch('https://api.digiflazz.com/v1/cek-saldo', {
 })
 .then(response => response.json())
 .then(data => {
-  m.reply("Deposit: " + data.data.deposit + "\n" + "Message: " + data.data.message);
+  m.reply("Saldo Anda: " + data.data.deposit)
   console.log(data)
 })
 .catch((error) => {
