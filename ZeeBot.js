@@ -11429,12 +11429,12 @@ break
 case 'daftarharga': {
 const input = args[0] || "e798f251069c2f2ad67c478e15b0598c"
 const data = {
-  cmd: "deposit",
+  cmd: "prepaid",
   username: "gozajuDzMpAo",
   sign: input
 };
 
-fetch('https://api.digiflazz.com/v1/cek-saldo', {
+fetch('https://api.digiflazz.com/v1/price-list', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -11443,7 +11443,7 @@ fetch('https://api.digiflazz.com/v1/cek-saldo', {
 })
 .then(response => response.json())
 .then(data => {
-  m.reply(`${data.data}`)
+  ZeeBot.sendMessage(from, { text: data.data }, m)
   console.log(data)
 })
 .catch((error) => {
