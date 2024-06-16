@@ -233,11 +233,9 @@ CFonts.say('ZEEBOT MD', {
   maxLength: '0',             // Panjang maksimal teks (0 untuk tidak dibatasi)
 });
             console.log('\n> Terkoneksi Ke Bot < [ ! ]')
-            ZeeBot.sendMessage("6285200808240@s.whatsapp.net", { text: "Bot Online", 
-contextInfo:{
-forwardingScore: 9999999, 
-isForwarded: true
-}})
+            ZeeBot.sendMessage("6285200808240@s.whatsapp.net", {
+					text: `「 Bot Online 」`,
+				})
 		}
 	
 } catch (err) {

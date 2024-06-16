@@ -11441,7 +11441,7 @@ fetch('https://api.digiflazz.com/v1/price-list', {
   },
   body: JSON.stringify(data),
 })
-.then(response => response.json())
+.then(response => response.text())
 .then(data => {
   ZeeBot.sendMessage(from, { text: data.data }, m)
   console.log(data)
