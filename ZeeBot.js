@@ -11460,7 +11460,7 @@ let nomor = args[2]
 let refidcustom = args[3]
 if (!kode_sku) return m.reply("Mohon Masukkan Kode SKU Product")
 if (!nomor) return m.reply("Mohon Masukkan Nomor Customer")
-refdigi.push(randomBytes(8).toString('hex'))
+refdigi.push(new randomBytes(8).toString('hex'))
 fs.writeFileSync('./src/digiflazz_ref-id.json', JSON.stringify(refdigi))
 m.reply("Membuat Ref_ID baru, Mohon ditunggu")
 await sleep(3000)
@@ -11485,7 +11485,7 @@ fetch('https://api.digiflazz.com/v1/transaction', {
 })
 .then(response => response.json())
 .then(data => {
- // res = data.data.map(v => `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}\n*Saldo Terakhir:* ${v.buyer_last_saldo}\n*Harga:* ${v.price}`).join`\n\n`
+//  res = data.data.map(v => `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}\n*Saldo Terakhir:* ${v.buyer_last_saldo}\n*Harga:* ${v.price}`).join`\n\n`
 //  m.reply(res)
   console.log(data)
 })
