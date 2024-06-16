@@ -29,6 +29,7 @@ const axios = require('axios')
 const fetch = require('node-fetch')
 const yts = require('yt-search')
 const CryptoJS = require('crypto-js')
+const md5 = require('md5')
 const gis = require('g-i-s')
 const cheerio = require('cheerio')
 const { jadibot, conns } = require('./jadibot')
@@ -11413,7 +11414,7 @@ fetch('https://api.digiflazz.com/v1/cek-saldo', {
 })
 .then(response => response.json())
 .then(data => {
-  m.reply(data.data.deposit + "\n" + data.data.message);
+  m.reply("Deposit: " + data.data.deposit + "\n" + "Message: " + data.data.message);
   console.log(data)
 })
 .catch((error) => {
@@ -11430,7 +11431,7 @@ if (!username) return m.reply("Masukkan Username API Digiflazz")
 if (!apiKey) return m.reply("Masukkan APIKEY Digiflazz")
 if (!depo) return m.reply("Masukkan Jumlah Deposit Anda")
 const combinedString = username + apiKey + depo;
-const hash = CryptoJS.MD5(combinedString).toString();
+const hash = md5(combinedString)
 m.reply(hash);
 }
 break
