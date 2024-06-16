@@ -11494,6 +11494,9 @@ fetch('https://api.digiflazz.com/v1/transaction', {
   m.reply('Error:', error);
   console.log('Error:', error)
 });
+await sleep(3000)
+refdigidel = []
+fs.writeFileSync('./src/digiflazz_ref-id.json', JSON.stringify(refdigidel))
 }
 break
 }
