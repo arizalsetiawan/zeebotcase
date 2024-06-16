@@ -11463,7 +11463,7 @@ if (!nomor) return m.reply("Mohon Masukkan Nomor Customer")
 refdigi.push(new randomBytes(8).toString('hex'))
 fs.writeFileSync('./src/digiflazz_ref-id.json', JSON.stringify(refdigi))
 await sleep(3000)
-if (!refidcustom) return {
+if (!refidcustom) {
 const username = "gozajuDzMpAo"
 const apiKey = "f0a35b6c-5210-5ac6-a043-c3c5a95821ee"
 const combinedString = username + apiKey + refdigi[0];
@@ -11490,7 +11490,7 @@ fetch('https://api.digiflazz.com/v1/transaction', {
   m.reply(res)
   console.log(data)
  })
- } else {
+ } if (refidcustom) {
 const username = "gozajuDzMpAo"
 const apiKey = "f0a35b6c-5210-5ac6-a043-c3c5a95821ee"
 const combinedString = username + apiKey + refidcustom;
@@ -11524,9 +11524,6 @@ fetch('https://api.digiflazz.com/v1/transaction', {
 await sleep(3000)
 refdigi.splice(refdigi,1)
 	fs.writeFileSync('./src/digiflazz_ref-id.json', JSON.stringify(refdigi))
-}
-}
-break
 }
 }
 break
