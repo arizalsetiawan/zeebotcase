@@ -11441,9 +11441,10 @@ fetch('https://api.digiflazz.com/v1/price-list', {
   },
   body: JSON.stringify(data),
 })
-.then(response => response.text())
+.then(response => response.json())
 .then(data => {
-  ZeeBot.sendMessage(from, { text: data.data }, m)
+  res = data.data.map(v => `*Nama Produk:* ${v.desc}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* ${v.price}\n*Stok:* ${v.stock}`).join`\n\n`
+  m.reply(res)
   console.log(data)
 })
 .catch((error) => {
