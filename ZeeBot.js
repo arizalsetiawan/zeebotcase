@@ -5355,13 +5355,13 @@ let push = [];
   for (let lucuy of ult) {
     push.push({
       body: proto.Message.InteractiveMessage.Body.fromObject({
-        text: `• VPS\n• PANEL PETRODACTYL\n• SECRIP BOT WHATSAPP\n• DAN MASIH BANYAK LAGI`
+        text: ``
       }),
       footer: proto.Message.InteractiveMessage.Footer.fromObject({
-        text: ownername
+        text: ''
       }),
       header: proto.Message.InteractiveMessage.Header.fromObject({
-        title: `ARZEESTORE MENYEDIAKAN :`,
+        title: ``,
         hasMediaAttachment: true,
         imageMessage: await createImage(lucuy)
       }),
@@ -5391,7 +5391,7 @@ let push = [];
             text: mess.done
           }),
           footer: proto.Message.InteractiveMessage.Footer.create({
-            text: 'HASIL PENCARIAN'
+            text: `Hasil Pencarian Untuk ${text}`
           }),
           header: proto.Message.InteractiveMessage.Header.create({
             hasMediaAttachment: false
