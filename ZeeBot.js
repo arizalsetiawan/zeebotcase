@@ -5349,7 +5349,7 @@ let push = [];
   let res = data.resource_response.data.results.map(v => v.images.orig.url);
 
   shuffleArray(res);
-  let ult = res.splice(0, 10);
+  let ult = res.splice(0, 20);
   let i = 1;
 
   for (let lucuy of ult) {
@@ -5368,9 +5368,6 @@ let push = [];
       nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
         buttons: [
           {
-            "name": "cta_url",
-            "buttonParamsJson": `{"display_text":"OWNER","url":"https://wa.me/6285200808240","merchant_url":"https://www.google.com"}`
-          }, {
             "name": "cta_url",
             "buttonParamsJson": `{"display_text":"SOURCE","url":"https://www.pinterest.com/search/pins/?rs=typed&q=${text}","merchant_url":"https://www.pinterest.com/search/pins/?rs=typed&q=${text}"}`
           }
