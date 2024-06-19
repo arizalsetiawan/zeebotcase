@@ -331,6 +331,24 @@ module.exports = ZeeBot = async (ZeeBot, m, msg, chatUpdate, store) => {
 	return html.split('" rel="nofollow"')[0].split('start, <a href="')[1]
 }
 
+async function createImage(url) {
+    const { imageMessage } = await generateWAMessageContent({
+      image: {
+        url
+      }
+    }, {
+      upload: ZeeBot.waUploadToServer
+    });
+    return imageMessage;
+  }
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
 const sfile = {
 	search: async (query, page = 1) => {
 		let res = await fetch(`https://sfile.mobi/search.php?q=${query}&page=${page}`)
@@ -5324,12 +5342,73 @@ case 'gdrive': {
   }
 }
 break
-case 'pinterest': {
-if (!text) return replygc(`Enter Query`)
-let { pinterest } = require('./lib/scraper')
-anutrest = await pinterest(text)
-result = anutrest[Math.floor(Math.random() * anutrest.length)]
-ZeeBot.sendMessage(m.chat, { image: { url: result }, caption: '⭔ Media Url : '+result }, { quoted: m })
+case 'pin': case 'pinterest': {
+if (!text) return replygc(`Masukkan Pencarian`)
+let push = [];
+  let { data } = await axios.get(`https://www.pinterest.com/resource/BaseSearchResource/get/?source_url=%2Fsearch%2Fpins%2F%3Fq%3D${text}&data=%7B%22options%22%3A%7B%22isPrefetch%22%3Afalse%2C%22query%22%3A%22${text}%22%2C%22scope%22%3A%22pins%22%2C%22no_fetch_context_on_resource%22%3Afalse%7D%2C%22context%22%3A%7B%7D%7D&_=1619980301559`);
+  let res = data.resource_response.data.results.map(v => v.images.orig.url);
+
+  shuffleArray(res);
+  let ult = res.splice(0, 10);
+  let i = 1;
+
+  for (let lucuy of ult) {
+    push.push({
+      body: proto.Message.InteractiveMessage.Body.fromObject({
+        text: `• VPS\n• PANEL PETRODACTYL\n• SECRIP BOT WHATSAPP\n• DAN MASIH BANYAK LAGI`
+      }),
+      footer: proto.Message.InteractiveMessage.Footer.fromObject({
+        text: ownername
+      }),
+      header: proto.Message.InteractiveMessage.Header.fromObject({
+        title: `ARZEESTORE MENYEDIAKAN :`,
+        hasMediaAttachment: true,
+        imageMessage: await createImage(lucuy)
+      }),
+      nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
+        buttons: [
+          {
+            "name": "cta_url",
+            "buttonParamsJson": `{"display_text":"OWNER","url":"https://wa.me/6285200808240","merchant_url":"https://www.google.com"}`
+          }, {
+            "name": "cta_url",
+            "buttonParamsJson": `{"display_text":"SOURCE","url":"https://www.pinterest.com/search/pins/?rs=typed&q=${text}","merchant_url":"https://www.pinterest.com/search/pins/?rs=typed&q=${text}"}`
+          }
+        ]
+      })
+    });
+  }
+
+  const bot = generateWAMessageFromContent(m.chat, {
+    viewOnceMessage: {
+      message: {
+        messageContextInfo: {
+          deviceListMetadata: {},
+          deviceListMetadataVersion: 2
+        },
+        interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+          body: proto.Message.InteractiveMessage.Body.create({
+            text: mess.done
+          }),
+          footer: proto.Message.InteractiveMessage.Footer.create({
+            text: 'HASIL PENCARIAN'
+          }),
+          header: proto.Message.InteractiveMessage.Header.create({
+            hasMediaAttachment: false
+          }),
+          carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+            cards: [
+              ...push
+            ]
+          })
+        })
+      }
+    }
+  }, {});
+
+  await ZeeBot.relayMessage(m.chat, bot.message, {
+    messageId: bot.key.id
+  });
 }
 break
 case 'ringtone': {
@@ -11469,7 +11548,7 @@ const apiKey = "f0a35b6c-5210-5ac6-a043-c3c5a95821ee"
 const combinedString = username + apiKey + refdigi[0];
 const hash = md5(combinedString)
 const data = {
-  username: "gozajuDzMpAo",
+  username: username,
   buyer_sku_code: kode_sku,
   customer_no: nomor,
   ref_id: refdigi[0],
@@ -11486,7 +11565,7 @@ fetch('https://api.digiflazz.com/v1/transaction', {
 .then(response => response.json())
 .then(data => {
   v = data.data
-  res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}`
+  res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}`
   m.reply(res)
   console.log(data)
  })
@@ -11496,7 +11575,7 @@ const apiKey = "f0a35b6c-5210-5ac6-a043-c3c5a95821ee"
 const combinedString = username + apiKey + refidcustom;
 const hash = md5(combinedString)
 const data = {
-  username: "gozajuDzMpAo",
+  username: username,
   buyer_sku_code: kode_sku,
   customer_no: nomor,
   ref_id: refidcustom,
@@ -11513,7 +11592,7 @@ fetch('https://api.digiflazz.com/v1/transaction', {
 .then(response => response.json())
 .then(data => {
   v = data.data
-  res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}\n*SN:* ${v.sn}`
+  res = `*Ref ID:* ${v.ref_id}\n*Customer Number:* ${v.customer_no}\n*SKU Code:* ${v.buyer_sku_code}\n*Message:* ${v.message}\n*Status:* ${v.status}`
   m.reply(res)
   console.log(data)
 })
