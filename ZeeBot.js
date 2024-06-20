@@ -11088,16 +11088,15 @@ break
 case 'tariktunai': {
 let input = args[0]
 if (!input) return m.reply('Berapa jumlah tarik tunai dishift anda?')
-if (hanyaNomor(input)) {
 if (global.db.data.settings[botNumber].targettariktunai = '' || 0 {
  m.reply('Anda belum setting target Tarik Tunai!\nSilahkan ketik settargettrx')
- } else {
+ }
+if (hanyaNomor(input)) {
   global.db.data.settings[botNumber].tariktunai += input
     let trk = global.db.data.settings[botNumber].tariktunai
 	let target = global.db.data.settings[botNumber].targettariktunai
     let kurang = target - trk
 	m.reply(`Sukses Menambahkan Tarik Tunai Sejumlah *${input}*\n\nJumlah total tarik tunai saat ini: *${trk}*\nTarget tarik tunai: *${target}*\nKekurangan: *${kurang}*`)
-	}
 } else {
   m.reply("Input menggunakan angka.");
 }
@@ -11106,16 +11105,15 @@ break
 case '-tariktunai': {
 let input = args[0]
 if (!input) return m.reply('Berapa jumlah tarik tunai yang akan anda kurangi?')
-if (hanyaNomor(input)) {
 if (global.db.data.settings[botNumber].targettariktunai = '' || 0 {
  m.reply('Anda belum setting target Tarik Tunai!\nSilahkan ketik settargettrx')
- } else {
+ }
+if (hanyaNomor(input)) {
   global.db.data.settings[botNumber].tariktunai -= input
     let trk = global.db.data.settings[botNumber].tariktunai
     let target = global.db.data.settings[botNumber].targettariktunai
     let kurang = target - trk
 	m.reply(`Sukses Mengurangi Tarik Tunai Sejumlah *${input}*\n\nJumlah total tarik tunai saat ini: *${trk}*\nTarget tarik tunai: *${target}*\nKekurangan: *${kurang}*`)
-	}
 } else {
   m.reply("Input menggunakan angka.");
 }
