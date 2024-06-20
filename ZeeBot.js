@@ -11079,7 +11079,7 @@ m.reply(`No.toko_targetspd_spd_ach
 *AS*: ${totaltrgt}_${totalspd}_${prosentase}%`)
 }
 break
-case 'tarik tunai': {
+case 'tariktunai': {
 let trx = args[0]
 if (!trx) return m.reply('Berapa jumlah tarik tunai dishift anda?')
 if (trx) {
@@ -11089,7 +11089,7 @@ global.db.data.settings[botNumber].tariktunai += trx
 	}
 }
 break
-case '-tarik tunai': {
+case '-tariktunai': {
 let trx = args[0]
 if (!trx) return m.reply('Berapa jumlah tarik tunai yang akan anda kurangi?')
 if (trx) {
