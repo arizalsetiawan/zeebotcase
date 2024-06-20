@@ -47,7 +47,6 @@ const { xvideosSearch, xvideosdl, xnxxdl, xnxxSearch} = require('./lib/scraper3.
 const pkg = require('imgur')
 let ssh_prem = JSON.parse(fs.readFileSync('./cfg/ssh.json'))
 let refdigi = JSON.parse(fs.readFileSync('./src/digiflazz_ref-id.json'))
-let trxtunai = JSON.parse(fs.readFileSync('./src/tariktunai.json'))
 const { ImgurClient } = pkg
 const uploadImage = require('./lib/uploadImage')
 const client = new ImgurClient({ clientId: "a0113354926015a" })
