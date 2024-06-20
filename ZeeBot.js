@@ -11080,17 +11080,23 @@ m.reply(`No.toko_targetspd_spd_ach
 }
 break
 case 'tarik tunai': {
-if (!q) return m.reply('Berapa jumlah tarik tunai dishift anda?')
-global.db.data.settings[botNumber].tariktunai += q
+let trx = args[0]
+if (!trx) return m.reply('Berapa jumlah tarik tunai dishift anda?')
+if (trx) {
+global.db.data.settings[botNumber].tariktunai += trx
     let trk = `${global.db.data.settings[botNumber].tariktunai}`
 	m.reply(`Sukses Menambahkan Tarik Tunai\n\nJumlah total tarik tunai saat ini: ${trk}`)
+	}
 }
 break
 case '-tarik tunai': {
-if (!q) return m.reply('Berapa jumlah tarik tunai yang akan anda kurangi?')
-global.db.data.settings[botNumber].tariktunai -= q
+let trx = args[0]
+if (!trx) return m.reply('Berapa jumlah tarik tunai yang akan anda kurangi?')
+if (trx) {
+global.db.data.settings[botNumber].tariktunai -= trx
     let trk = `${global.db.data.settings[botNumber].tariktunai}`
 	m.reply(`Sukses Mengurangi Tarik Tunai\n\nJumlah total tarik tunai saat ini: ${trk}`)
+	}
 }
 break
 case 'txt2img': case 'text2image': case 'texttoimage': {
