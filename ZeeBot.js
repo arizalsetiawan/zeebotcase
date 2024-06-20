@@ -700,7 +700,7 @@ let idChatCharacterAI = characterAIdb()
                if (!('about' in setting)) setting.about = { bot: { nick: ZeeBot.getName(botNumber), alias: botname}, owner: { nick: ZeeBot.getName(global.ownernumber + '@s.whatsapp.net'), alias: global.ownernumber}}
             } else global.db.data.settings[botNumber] = {
                tariktunai: "",
-               targettariktunai: '"",
+               targettariktunai: "",
                totalhit: 0,
                totalError: 0,
                online: false,
