@@ -11088,7 +11088,7 @@ break
 case 'tariktunai': {
 let input = args[0]
 if (!input) return m.reply('Berapa jumlah tarik tunai dishift anda?')
-if (global.db.data.settings[botNumber].targettariktunai = '' || 0 {
+if (global.db.data.settings[botNumber].targettariktunai = '' || 0) {
  m.reply('Anda belum setting target Tarik Tunai!\nSilahkan ketik settargettrx')
  }
 if (hanyaNomor(input)) {
@@ -11105,7 +11105,7 @@ break
 case '-tariktunai': {
 let input = args[0]
 if (!input) return m.reply('Berapa jumlah tarik tunai yang akan anda kurangi?')
-if (global.db.data.settings[botNumber].targettariktunai = '' || 0 {
+if (global.db.data.settings[botNumber].targettariktunai = '' || 0) {
  m.reply('Anda belum setting target Tarik Tunai!\nSilahkan ketik settargettrx')
  }
 if (hanyaNomor(input)) {
