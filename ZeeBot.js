@@ -1483,7 +1483,6 @@ quoted: m
 }
 
 // Respon Cmd with media
-/*
 if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
 let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
 let { text, mentionedJid } = hash
@@ -1501,8 +1500,7 @@ let msg = {
     type: 'append'
 }
 ZeeBot.ev.emit('messages.upsert', msg)
-} 
-*/
+}
 //============= [LIST RESPONCE CHECKING START ]================
         if(m.mtype === "interactiveResponseMessage"){
             console.log("interactiveResponseMessage Detected!")   
@@ -5349,7 +5347,7 @@ let push = [];
   let res = data.resource_response.data.results.map(v => v.images.orig.url);
 
   shuffleArray(res);
-  let ult = res.splice(0, 20);
+  let ult = res.splice(0, 50);
   let i = 1;
 
   for (let lucuy of ult) {
@@ -10950,7 +10948,8 @@ const targetSpd = {
   t6r7: '8.877.935',
   tja6: '9.327.101',
   taqw: '28.520.819',
-  fcye: '10.533.274'
+  fcye: '10.533.274',
+  fsi7: '8.178.533'
 }
 var satu = q.split(' ')[0]
 var dua = q.split(' ')[1]
@@ -10962,17 +10961,19 @@ var tujuh = q.split(' ')[6]
 var delapan = q.split(' ')[7]
 var sembilan = q.split(' ')[8]
 var sepuluh = q.split(' ')[9]
+var sebelas = q.split(' ')[10]
 
-if (!satu) return m.reply('Anda belum input spd semua toko! Silahkan input sesuai urutan. TJD2 T2AI FT80 T7L6 TVV8 TLB9 T6R7 TJA6 TAQW FCYE')
-if (!dua) return m.reply('Anda belum input spd toko T2AI FT80 T7L6 TVV8 TLB9 T6R7 TJA6 TAQW FCYE')
-if (!tiga) return m.reply('Anda belum input spd toko FT80 T7L6 TVV8 TLB9 T6R7 TJA6 TAQW FCYE')
-if (!empat) return m.reply('Anda belum input spd toko T7L6 TVV8 TLB9 T6R7 TJA6 TAQW FCYE')
-if (!lima) return m.reply('Anda belum input spd toko TVV8 TLB9 T6R7 TJA6 TAQW FCYE')
-if (!enam) return m.reply('Anda belum input spd toko TLB9 T6R7 TJA6 TAQW FCYE')
-if (!tujuh) return m.reply('Anda belum input spd toko T6R7 TJA6 TAQW FCYE')
-if (!delapan) return m.reply('Anda belum input spd toko TJA6 TAQW FCYE')
-if (!sembilan) return m.reply('Anda belum input spd toko TAQW FCYE')
-if (!sepuluh) return m.reply('Anda belum input spd toko FCYE')
+if (!satu) return m.reply('Anda belum input spd semua toko! Silahkan input sesuai urutan. TJD2 T2AI FT80 T7L6 TVV8 TLB9 T6R7 TJA6 TAQW FCYE FSI7')
+if (!dua) return m.reply('Anda belum input spd toko T2AI FT80 T7L6 TVV8 TLB9 T6R7 TJA6 TAQW FCYE FSI7')
+if (!tiga) return m.reply('Anda belum input spd toko FT80 T7L6 TVV8 TLB9 T6R7 TJA6 TAQW FCYE FSI7')
+if (!empat) return m.reply('Anda belum input spd toko T7L6 TVV8 TLB9 T6R7 TJA6 TAQW FCYE FSI7')
+if (!lima) return m.reply('Anda belum input spd toko TVV8 TLB9 T6R7 TJA6 TAQW FCYE FSI7')
+if (!enam) return m.reply('Anda belum input spd toko TLB9 T6R7 TJA6 TAQW FCYE FSI7')
+if (!tujuh) return m.reply('Anda belum input spd toko T6R7 TJA6 TAQW FCYE FSI7')
+if (!delapan) return m.reply('Anda belum input spd toko TJA6 TAQW FCYE FSI7')
+if (!sembilan) return m.reply('Anda belum input spd toko TAQW FCYE FSI7')
+if (!sepuluh) return m.reply('Anda belum input spd toko FCYE FSI7')
+if (!sebelas) return m.reply('Anda belum input spd toko FSI7')
 
 let tspd1 = targetSpd.tjd2.replace(/\./g, '')
 let tspd2 = targetSpd.t2ai.replace(/\./g, '')
@@ -10984,6 +10985,7 @@ let tspd7 = targetSpd.t6r7.replace(/\./g, '')
 let tspd8 = targetSpd.tja6.replace(/\./g, '')
 let tspd9 = targetSpd.taqw.replace(/\./g, '')
 let tspd10 = targetSpd.fcye.replace(/\./g, '')
+let tspd11 = targetSpd.fsi7.replace(/\./g, '')
 
 let isatu = satu.replace(/\./g, '')
 let idua = dua.replace(/\./g, '')
@@ -10995,6 +10997,7 @@ let itujuh = tujuh.replace(/\./g, '')
 let idelapan = delapan.replace(/\./g, '')
 let isembilan = sembilan.replace(/\./g, '')
 let isepuluh = sepuluh.replace(/\./g, '')
+let isebelas = sebelas.replace(/\./g, '')
 
 var persen1 = (isatu / tspd1) * 100
 var persen2 = (idua / tspd2) * 100
@@ -11006,6 +11009,7 @@ var persen7 = (itujuh / tspd7) * 100
 var persen8 = (idelapan / tspd8) * 100
 var persen9 = (isembilan / tspd9) * 100
 var persen10 = (isepuluh / tspd10) * 100
+var persen11 = (isebelas / tspd11) * 100
 
 let prosentase1 = (Math.round(persen1 * 100) / 100).toFixed(2);
 let prosentase2 = (Math.round(persen2 * 100) / 100).toFixed(2);
@@ -11017,6 +11021,7 @@ let prosentase7 = (Math.round(persen7 * 100) / 100).toFixed(2);
 let prosentase8 = (Math.round(persen8 * 100) / 100).toFixed(2);
 let prosentase9 = (Math.round(persen9 * 100) / 100).toFixed(2);
 let prosentase10 = (Math.round(persen10 * 100) / 100).toFixed(2);
+let prosentase11 = (Math.round(persen11 * 100) / 100).toFixed(2);
 
 function hitungTotal(jumlah) {
     let total = 0;
@@ -11044,13 +11049,14 @@ let inputanSpd = [
     `${tujuh}`,
     `${delapan}`,
     `${sembilan}`,
-    `${sepuluh}`
+    `${sepuluh}`,
+    `${sebelas}`
 ];
 
 let totalspd = hitungTotal(inputanSpd);
 let totalspdd = hitungTotall(inputanSpd);
-var totalalltarget = '131121019'
-var totaltrgt = '131.121.019'
+var totalalltarget = '139299552'
+var totaltrgt = '139.299.552'
 var totalpersen = (totalspdd / totalalltarget) * 100
 let prosentase = (Math.round(totalpersen * 100) / 100).toFixed(2);
 m.reply(`No.toko_targetspd_spd_ach
@@ -11064,6 +11070,7 @@ m.reply(`No.toko_targetspd_spd_ach
 8.TJA6_${targetSpd.tja6}_${delapan}_${prosentase8}%
 9.TAQW_${targetSpd.taqw}_${sembilan}_${prosentase9}%
 10.FCYE_${targetSpd.fcye}_${sepuluh}_${prosentase10}%
+10.FSI7_${targetSpd.fsi7}_${sebelas}_${prosentase11}%
 
 *AS*: ${totaltrgt}_${totalspd}_${prosentase}%`)
 }
