@@ -325,6 +325,10 @@ module.exports = ZeeBot = async (ZeeBot, m, msg, chatUpdate, store) => {
         ZeeBot.sendMessage(from, { sticker: XeonStikRep }, { quoted: m })
         }
  
+ function hanyaNomor(input) {
+  return /^\d+$/.test(input);
+}
+ 
  async function getLink(url) {
 	url = 'https://sfile.mobi/download' + (new URL(url)).pathname
 	let html = await (await fetch(url)).text()
@@ -673,7 +677,7 @@ let idChatCharacterAI = characterAIdb()
             let setting = global.db.data.settings[botNumber]
             if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
             if (setting) {
-               if (!('tariktunai' in setting)) setting.tariktunai = 0
+               if (!('tariktunai' in setting)) setting.tariktunai = ''
                if (!('totalhit' in setting)) setting.totalhit = 0
                if (!('totalError' in setting)) setting.totalError = 0
                if (!('online' in setting)) setting.online = false 
@@ -694,7 +698,7 @@ let idChatCharacterAI = characterAIdb()
                if (!('IDchatCharacterGC' in setting)) setting.IDchatCharacterGC = idChatCharacterAI
                if (!('about' in setting)) setting.about = { bot: { nick: ZeeBot.getName(botNumber), alias: botname}, owner: { nick: ZeeBot.getName(global.ownernumber + '@s.whatsapp.net'), alias: global.ownernumber}}
             } else global.db.data.settings[botNumber] = {
-               tariktunai: 0,
+               tariktunai: '',
                totalhit: 0,
                totalError: 0,
                online: false,
@@ -11080,23 +11084,27 @@ m.reply(`No.toko_targetspd_spd_ach
 }
 break
 case 'tariktunai': {
-let trx = args[0]
-if (!trx) return m.reply('Berapa jumlah tarik tunai dishift anda?')
-if (trx) {
-global.db.data.settings[botNumber].tariktunai += trx
+let input = args[0]
+if (!input) return m.reply('Berapa jumlah tarik tunai dishift anda?')
+if (hanyaNomor(input)) {
+  global.db.data.settings[botNumber].tariktunai += trx
     let trk = `${global.db.data.settings[botNumber].tariktunai}`
-	m.reply(`Sukses Menambahkan Tarik Tunai\n\nJumlah total tarik tunai saat ini: ${trk}`)
-	}
+	m.reply(`Sukses Menambahkan Tarik Tunai Sejumlah *${input}*\n\nJumlah total tarik tunai saat ini: *${trk}*`)
+} else {
+  m.reply("Input menggunakan angka.");
+}
 }
 break
 case '-tariktunai': {
-let trx = args[0]
-if (!trx) return m.reply('Berapa jumlah tarik tunai yang akan anda kurangi?')
-if (trx) {
-global.db.data.settings[botNumber].tariktunai -= trx
+let input = args[0]
+if (!input) return m.reply('Berapa jumlah tarik tunai yang akan anda kurangi?')
+if (hanyaNomor(input)) {
+  global.db.data.settings[botNumber].tariktunai -= trx
     let trk = `${global.db.data.settings[botNumber].tariktunai}`
-	m.reply(`Sukses Mengurangi Tarik Tunai\n\nJumlah total tarik tunai saat ini: ${trk}`)
-	}
+	m.reply(`Sukses Mengurangi Tarik Tunai Sejumlah *${input}*\n\nJumlah total tarik tunai saat ini: *${trk}*`)
+} else {
+  m.reply("Input menggunakan angka.");
+}
 }
 break
 case 'txt2img': case 'text2image': case 'texttoimage': {
