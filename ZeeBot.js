@@ -47,6 +47,7 @@ const { xvideosSearch, xvideosdl, xnxxdl, xnxxSearch} = require('./lib/scraper3.
 const pkg = require('imgur')
 let ssh_prem = JSON.parse(fs.readFileSync('./cfg/ssh.json'))
 let refdigi = JSON.parse(fs.readFileSync('./src/digiflazz_ref-id.json'))
+let trxtunai = JSON.parse(fs.readFileSync('./src/tariktunai.json'))
 const { ImgurClient } = pkg
 const uploadImage = require('./lib/uploadImage')
 const client = new ImgurClient({ clientId: "a0113354926015a" })
@@ -673,6 +674,7 @@ let idChatCharacterAI = characterAIdb()
             let setting = global.db.data.settings[botNumber]
             if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
             if (setting) {
+               if (!('tariktunai' in setting)) setting.tariktunai = 0
                if (!('totalhit' in setting)) setting.totalhit = 0
                if (!('totalError' in setting)) setting.totalError = 0
                if (!('online' in setting)) setting.online = false 
@@ -693,6 +695,7 @@ let idChatCharacterAI = characterAIdb()
                if (!('IDchatCharacterGC' in setting)) setting.IDchatCharacterGC = idChatCharacterAI
                if (!('about' in setting)) setting.about = { bot: { nick: ZeeBot.getName(botNumber), alias: botname}, owner: { nick: ZeeBot.getName(global.ownernumber + '@s.whatsapp.net'), alias: global.ownernumber}}
             } else global.db.data.settings[botNumber] = {
+               tariktunai: 0,
                totalhit: 0,
                totalError: 0,
                online: false,
@@ -11075,6 +11078,20 @@ m.reply(`No.toko_targetspd_spd_ach
 10.FSI7_${targetSpd.fsi7}_${sebelas}_${prosentase11}%
 
 *AS*: ${totaltrgt}_${totalspd}_${prosentase}%`)
+}
+break
+case 'tarik tunai': {
+if (!q) return m.reply('Berapa jumlah tarik tunai dishift anda?')
+global.db.data.settings[botNumber].tariktunai += q
+    let trk = `${global.db.data.settings[botNumber].tariktunai}`
+	m.reply(`Sukses Menambahkan Tarik Tunai\n\nJumlah total tarik tunai saat ini: ${trk}`)
+}
+break
+case '-tarik tunai': {
+if (!q) return m.reply('Berapa jumlah tarik tunai yang akan anda kurangi?')
+global.db.data.settings[botNumber].tariktunai -= q
+    let trk = `${global.db.data.settings[botNumber].tariktunai}`
+	m.reply(`Sukses Mengurangi Tarik Tunai\n\nJumlah total tarik tunai saat ini: ${trk}`)
 }
 break
 case 'txt2img': case 'text2image': case 'texttoimage': {
