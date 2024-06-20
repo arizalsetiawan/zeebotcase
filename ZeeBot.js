@@ -677,7 +677,7 @@ let idChatCharacterAI = characterAIdb()
             let setting = global.db.data.settings[botNumber]
             if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
             if (setting) {
-               if (!('tariktunai' in setting)) setting.tariktunai = ''
+               if (!('tariktunai' in setting)) setting.tariktunai = 0
                if (!('targettariktunai' in setting)) setting.targettariktunai = ''
                if (!('totalhit' in setting)) setting.totalhit = 0
                if (!('totalError' in setting)) setting.totalError = 0
@@ -699,7 +699,7 @@ let idChatCharacterAI = characterAIdb()
                if (!('IDchatCharacterGC' in setting)) setting.IDchatCharacterGC = idChatCharacterAI
                if (!('about' in setting)) setting.about = { bot: { nick: ZeeBot.getName(botNumber), alias: botname}, owner: { nick: ZeeBot.getName(global.ownernumber + '@s.whatsapp.net'), alias: global.ownernumber}}
             } else global.db.data.settings[botNumber] = {
-               tariktunai: '',
+               tariktunai: 0,
                targettariktunai: '',
                totalhit: 0,
                totalError: 0,
@@ -11090,10 +11090,10 @@ let input = args[0]
 if (!input) return m.reply('Berapa jumlah tarik tunai dishift anda?')
 if (global.db.data.settings[botNumber].targettariktunai == '') return m.reply('Anda belum setting target Tarik Tunai!\nSilahkan ketik settargettrx')
 if (hanyaNomor(input)) {
-  global.db.data.settings[botNumber].tariktunai += input
     let trk = global.db.data.settings[botNumber].tariktunai
 	let target = global.db.data.settings[botNumber].targettariktunai
     let kurang = target - trk
+    trk += input
 	m.reply(`Sukses Menambahkan Tarik Tunai Sejumlah *${input}*\n\nJumlah total tarik tunai saat ini: *${trk}*\nTarget tarik tunai: *${target}*\nKekurangan: *${kurang}*`)
 } else {
   m.reply("Input menggunakan angka.");
@@ -11105,10 +11105,10 @@ let input = args[0]
 if (!input) return m.reply('Berapa jumlah tarik tunai yang akan anda kurangi?')
 if (global.db.data.settings[botNumber].targettariktunai == '') return m.reply('Anda belum setting target Tarik Tunai!\nSilahkan ketik settargettrx')
 if (hanyaNomor(input)) {
-  global.db.data.settings[botNumber].tariktunai -= input
     let trk = global.db.data.settings[botNumber].tariktunai
     let target = global.db.data.settings[botNumber].targettariktunai
     let kurang = target - trk
+    trk -= input
 	m.reply(`Sukses Mengurangi Tarik Tunai Sejumlah *${input}*\n\nJumlah total tarik tunai saat ini: *${trk}*\nTarget tarik tunai: *${target}*\nKekurangan: *${kurang}*`)
 } else {
   m.reply("Input menggunakan angka.");
