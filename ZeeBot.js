@@ -11080,7 +11080,7 @@ m.reply(`No.toko_targetspd_spd_ach
 8.TJA6_${targetSpd.tja6}_${delapan}_${prosentase8}%
 9.TAQW_${targetSpd.taqw}_${sembilan}_${prosentase9}%
 10.FCYE_${targetSpd.fcye}_${sepuluh}_${prosentase10}%
-10.FSI7_${targetSpd.fsi7}_${sebelas}_${prosentase11}%
+11.FSI7_${targetSpd.fsi7}_${sebelas}_${prosentase11}%
 
 *AS*: ${totaltrgt}_${totalspd}_${prosentase}%`)
 }
@@ -11090,7 +11090,7 @@ let input = args[0]
 if (!input) return m.reply('Berapa jumlah tarik tunai dishift anda?')
 if (global.db.data.settings[botNumber].targettariktunai == '') return m.reply('Anda belum setting target Tarik Tunai!\nSilahkan ketik settargettrx')
 if (hanyaNomor(input)) {
-  global.db.data.settings[botNumber].tariktunai + input
+  global.db.data.settings[botNumber].tariktunai += input
     let trk = global.db.data.settings[botNumber].tariktunai
 	let target = global.db.data.settings[botNumber].targettariktunai
     let kurang = target - trk
