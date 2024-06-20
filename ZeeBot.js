@@ -1483,6 +1483,7 @@ quoted: m
 }
 
 // Respon Cmd with media
+/*
 if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
 let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
 let { text, mentionedJid } = hash
@@ -1500,7 +1501,8 @@ let msg = {
     type: 'append'
 }
 ZeeBot.ev.emit('messages.upsert', msg)
-}
+} 
+*/
 //============= [LIST RESPONCE CHECKING START ]================
         if(m.mtype === "interactiveResponseMessage"){
             console.log("interactiveResponseMessage Detected!")   
