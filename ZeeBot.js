@@ -933,6 +933,13 @@ async function styletext(teks) {
         })
     })
 }
+
+function formatRupiah(angka) {
+  var reverse = angka.toString().split('').reverse().join('');
+  var ribuan = reverse.match(/\d{1,3}/g);
+  var hasil = ribuan.join('.').split('').reverse().join('');
+  return 'Rp ' + hasil;
+}
         
         async function Telesticker(url) {
     return new Promise(async (resolve, reject) => {
@@ -11619,7 +11626,7 @@ fetch('https://api.digiflazz.com/v1/price-list', {
 .then(data => {
   const res = data.data
   .filter(v => v.category === "Pulsa")
-  .map(v => `*Nama Produk:* ${v.desc}\n*SKU Code:* ${v.buyer_sku_code}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* ${v.price}`)
+  .map(v => `*Nama Produk:* ${v.desc}\n*SKU Code:* ${v.buyer_sku_code}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* `+ formatRupiah(`${v.price}`))
   .join('\n\n');
   m.reply(res)
   console.log(data)
