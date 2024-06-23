@@ -11541,7 +11541,7 @@ case "fetch":
   }
   break
 case 'digi': {
-if (cekSaldo(sender,db_saldo) < 3000) return Zeebot.sendMessage(from, { text: `Maaf *@${sender.split('@')[0]}*, sepertinya saldo kamu kurang dari Rp3.000 Silahkan melakukan deposit terlebih dahulu sebelum menggunakan fitur ${command}`, mentions: [sender]}, { quoted: m })
+if (cekSaldo(sender,db_saldo) < 3000) return ZeeBot.sendMessage(from, { text: `Maaf *@${sender.split('@')[0]}*, sepertinya saldo kamu kurang dari Rp3.000 Silahkan melakukan deposit terlebih dahulu sebelum menggunakan fitur ${command}`, mentions: [sender]}, { quoted: m })
 let type = (args[0] || '').toLowerCase()
 switch (type) {
 case 'saldo': {
