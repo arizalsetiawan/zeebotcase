@@ -11596,7 +11596,7 @@ fetch('https://api.digiflazz.com/v1/price-list', {
 .then(data => {
   const res = data.data
   .filter(v => v.category === "Games")
-  .map(v => `*Nama Produk:* ${v.desc}\n*SKU Code:* ${v.buyer_sku_code}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* ${v.price}`)
+  .map(v => `*Nama Produk:* ${v.desc}\n*SKU Code:* ${v.buyer_sku_code}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* `+ formatRupiah(`${v.price}`))
   .join('\n\n');
   m.reply(res)
   console.log(data)
