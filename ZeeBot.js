@@ -11570,7 +11570,7 @@ fetch('https://api.digiflazz.com/v1/cek-saldo', {
 });
 }
 break
-case 'daftarharga': {
+case 'game': {
 const input = args[0] || "e798f251069c2f2ad67c478e15b0598c"
 const data = {
   cmd: "prepaid",
@@ -11589,6 +11589,36 @@ fetch('https://api.digiflazz.com/v1/price-list', {
 .then(data => {
   const res = data.data
   .filter(v => v.category === "Games")
+  .map(v => `*Nama Produk:* ${v.desc}\n*SKU Code:* ${v.buyer_sku_code}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* ${v.price}`)
+  .join('\n\n');
+  m.reply(res)
+  console.log(data)
+})
+.catch((error) => {
+  m.reply('Error:', error);
+  console.log('Error:', error)
+});
+}
+break
+case 'pulsa': {
+const input = args[0] || "e798f251069c2f2ad67c478e15b0598c"
+const data = {
+  cmd: "prepaid",
+  username: "gozajuDzMpAo",
+  sign: input
+};
+
+fetch('https://api.digiflazz.com/v1/price-list', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  const res = data.data
+  .filter(v => v.category === "Pulsa")
   .map(v => `*Nama Produk:* ${v.desc}\n*SKU Code:* ${v.buyer_sku_code}\n*Kategori:* ${v.category}\n*Brand:* ${v.brand}\n*Harga:* ${v.price}`)
   .join('\n\n');
   m.reply(res)
