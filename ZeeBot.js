@@ -13,6 +13,7 @@ const {
     getContentType
 } = require('@whiskeysockets/baileys')
 const { default: makeWaSocket, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const { addSaldo, minSaldo, cekSaldo, cekKoinPerak } = require('./database/deposit')
 const os = require('os')
 const fs = require('fs')
 const pino = require('pino');
@@ -130,6 +131,7 @@ let ntnsfw = JSON.parse(fs.readFileSync('./src/data/function/nsfw.json'))
 let bad = JSON.parse(fs.readFileSync('./src/data/function/badword.json'))
 let premium = JSON.parse(fs.readFileSync('./src/data/role/premium.json'))
 const owner = JSON.parse(fs.readFileSync('./src/data/role/owner.json'))
+let db_saldo = JSON.parse(fs.readFileSync('./database/saldo.json'))
 //media
 const VoiceNoteXeon = JSON.parse(fs.readFileSync('./ZeeMedia/database/xeonvn.json'))
 const StickerXeon = JSON.parse(fs.readFileSync('./ZeeMedia/database/xeonsticker.json'))
@@ -434,7 +436,13 @@ caption: `${Arzee + xeontext1}`,
 }, {quoted: subscribe_Arzee })
 }
 //end bug functions
-
+function toRupiah(angka) {
+var saldo = '';
+var angkarev = angka.toString().split('').reverse().join('');
+for (var i = 0; i < angkarev.length; i++)
+if (i % 3 == 0) saldo += angkarev.substr(i, 3) + '.';
+return '' + saldo.split('', saldo.length - 1).reverse().join('');
+}
         //premium
         async function replyprem(teks) {
     replygc(`This feature is for premium user, contact the owner to become premium user`)
@@ -11533,6 +11541,7 @@ case "fetch":
   }
   break
 case 'digi': {
+if (cekSaldo(sender,db_saldo) < 3000) return Zeebot.sendMessage(from, { text: `Maaf *@${sender.split('@')[0]}*, sepertinya saldo kamu kurang dari Rp3.000 Silahkan melakukan deposit terlebih dahulu sebelum menggunakan fitur ${command}`, mentions: [sender]}, { quoted: m })
 let type = (args[0] || '').toLowerCase()
 switch (type) {
 case 'saldo': {
@@ -11674,6 +11683,30 @@ if (!depo) return m.reply("Masukkan Jumlah Deposit Anda")
 const combinedString = username + apiKey + depo;
 const hash = md5(combinedString)
 m.reply(hash);
+}
+break
+case 'saldo':{
+m.reply(`*━━ CHECK YOUR INFO ━━*
+
+ _• *Name:* ${pushname}_
+ _• *Nomer:* ${sender.split('@')[0]}_
+ _• *Saldo:* Rp${toRupiah(cekSaldo(sender, db_saldo))}_
+
+*Note :*
+_Saldo hanya bisa untuk beli di bot_
+_Tidak bisa ditarik atau transfer_!`)
+}
+break
+case 'acc': case 'addsaldo':{
+if (!isOwner) return m.reply('Maaf, command ini hanya untuk owner.')
+if (!q.split(',')[0]) return m.reply(`Ex : ${prefix+command} nomor,jumlah\n\nContoh :\n${prefix+command} 628xxx,20000`)
+if (!q.split(',')[1]) return m.reply(`Ex : ${prefix+command} nomor,jumlah\n\nContoh :\n${prefix+command} 628xxx,20000`)
+addSaldo(q.split(',')[0]+'@s.whatsapp.net', Number(q.split(',')[1]), db_saldo)
+m.reply(`「 *SALDO USER* 」
+⭔ID: @${sender.split('@')[0]}
+⭔Nomer: @${q.split(',')[0]}
+⭔Tanggal: ${tanggal}
+⭔Saldo: Rp${toRupiah(cekSaldo(q.split(',')[0]+'@s.whatsapp.net', db_saldo))}`)
 }
 break
 case 'ai':
