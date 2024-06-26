@@ -11766,7 +11766,7 @@ let msgs = generateWAMessageFromContent(m.chat, {
             text: '> Chat GPT\n\n' + gpt.data.response
           }),
           footer: proto.Message.InteractiveMessage.Footer.create({
-            text: botname
+            text: ''
           }),
           header: proto.Message.InteractiveMessage.Header.create({
           hasMediaAttachment: false,
@@ -11784,7 +11784,7 @@ let msgs = generateWAMessageFromContent(m.chat, {
                   isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                   newsletterJid: '1203632223956756770@newsletter',
-                  newsletterName: ownername,
+                  newsletterName: botname,
                   serverMessageId: 143
                 }
                 }
