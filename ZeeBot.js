@@ -11751,20 +11751,70 @@ m.reply(`「 *SALDO USER* 」
 break
 case 'ai':
 case 'openai': {
+	if (!text) return m.reply(`*• Example:* ${prefix + command} what is your name`);   
+        try {
+let gpt = await (await fetch(`https://itzpire.com/ai/gpt?model=gpt-4&q=${text}`)).json()
+let msgs = generateWAMessageFromContent(m.chat, {
+  viewOnceMessage: {
+    message: {
+        "messageContextInfo": {
+          "deviceListMetadata": {},
+          "deviceListMetadataVersion": 2
+        },
+        interactiveMessage: proto.Message.InteractiveMessage.create({
+          body: proto.Message.InteractiveMessage.Body.create({
+            text: '> Chat GPT\n\n' + gpt.data.response
+          }),
+          footer: proto.Message.InteractiveMessage.Footer.create({
+            text: botname
+          }),
+          header: proto.Message.InteractiveMessage.Header.create({
+          hasMediaAttachment: false,
+          ...await prepareWAMessageMedia({ image:  fs.readFileSync('./ZeeMedia/theme/zeebot.jpg')}, { upload: ZeeBot.waUploadToServer })
+          }),
+          nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+            buttons: [{
+            "name": "quick_reply",
+              "buttonParamsJson": `{\"display_text\":\"👀\",\"id\":\"\"}`
+            }],
+          }),
+          contextInfo: {
+                  mentionedJid: [m.sender], 
+                  forwardingScore: 999,
+                  isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                  newsletterJid: '1203632223956756770@newsletter',
+                  newsletterName: ownername,
+                  serverMessageId: 143
+                }
+                }
+       })
+    }
+  }
+}, { quoted: m })
+await ZeeBot.relayMessage(m.chat, msgs.message, {})
+ } catch(e) {
+ return m.reply("`*Error*`")
+}
+}
+    break
+/*
+case 'ai':
+case 'openai': {
 	if (!text) return replygc(`*• Example:* ${prefix + command} what is your name`);
 	try {
 	await ZeeBot.sendMessage(m.chat, { react: { text: "⏱️",key: m.key}})
         let response = await fetch(`https://aemt.me/openai?text=${text}`)
         let has = await response.json()
         let hasil = has.result
-          /*  const response = await axios.post("https://deepenglish.com/wp-json/ai-chatbot/v1/chat", {
+         //   const response = await axios.post("https://deepenglish.com/wp-json/ai-chatbot/v1/chat", {
                 messages: [
                     { role: "system", content: `ZeeBot` },
                     { role: "user", content: text }
                 ]
             });
            const hasil = response.data;   
-           */
+          // 
            if (has.status == true) {
            ZeeBot.sendMessage(m.chat, {
                         text: hasil,
@@ -11824,6 +11874,7 @@ await ZeeBot.relayMessage(msg.key.remoteJid, msg.message, {
     }
     }
     break
+    */
 case 'wikipedia': case 'wiki': {
 	if (!text) return replygc(` Enter what you want to search for on Wikipedia`)
 	
