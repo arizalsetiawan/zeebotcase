@@ -1121,11 +1121,6 @@ await ZeeBot.sendMessage(from, {text: xeonlod[i], edit: key })
 }
 } 
 
-const botimun = (texto) => {
-ZeeBot.sendMessage(from, { text: texto, mentions: [sender]}, {quoted: m }).catch(e => {
-return m.reply("Erro..")
-})
-}
 
 async function obfus(query) {
     return new Promise((resolve, reject) => {
